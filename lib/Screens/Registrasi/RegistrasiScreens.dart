@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:logins_screen/utils/constants.dart';
 
 import '../../../size_config.dart';
-import '../../Components/Login/LoginComponent.dart';
+import '../../Components/Registrasi/RegistrasiComponent.dart';
 
-class LoginScreen extends StatelessWidget {
-  static String routeName = "/sign_in";
+class RegistrasiScreen extends StatelessWidget {
+  static String routeName = "/sign_up";
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -12,7 +13,7 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
       ),
-      body: LoginComponent(),
+      body: RegistrasiComponent(),
     );
   }
 }

@@ -90,6 +90,9 @@ var mTitleStyleColorWhite = GoogleFonts.inter(
 var mTitleStyle16 = GoogleFonts.inter(
     fontWeight: FontWeight.w600, color: mTitleColor, fontSize: 16);
 
+var mTitleStyle18 = GoogleFonts.inter(
+    fontWeight: FontWeight.w600, color: mTitleColor, fontSize: 25);
+
 var mTitleStyleColorTeal = GoogleFonts.inter(
     fontWeight: FontWeight.w600, color: kColorTeal, fontSize: 10);
 

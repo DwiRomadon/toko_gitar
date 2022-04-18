@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logins_screen/Screens/Login/LoginScreens.dart';
+import 'package:logins_screen/Screens/Registrasi/RegistrasiScreens.dart';
 
-import '../../Screens/Registrasi/RegistrasiScreens.dart';
 import '../../size_config.dart';
 import '../../utils/constants.dart';
 import '../custom_surfix_icon.dart';
 import '../default_button_custome_color.dart';
 
-class SignForm extends StatefulWidget {
+class RegisterForm extends StatefulWidget {
   @override
-  _SignFormState createState() => _SignFormState();
+  _RegisterForm createState() => _RegisterForm();
 }
 
-class _SignFormState extends State<SignForm> {
+class _RegisterForm extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
@@ -35,35 +35,17 @@ class _SignFormState extends State<SignForm> {
       key: _formKey,
       child: Column(
         children: [
+          buildUserNamaLengkapFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
           buildUserNameFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildUserEmailLengkapFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          Row(
-            children: [
-              Checkbox(
-                value: remember,
-                activeColor: mTitleColor,
-                onChanged: (value) {
-                  setState(() {
-                    remember = value;
-                  });
-                },
-              ),
-              const Text("Tetap Masuk"),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {},
-                child: const Text(
-                  "Lupa Password",
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              )
-            ],
-          ),
           DefaultButtonCustomeColor(
             color: kPrimaryColor,
-            text: "MASUK",
+            text: "Register",
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
@@ -75,10 +57,10 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: 20,),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, RegistrasiScreen.routeName);
+              Navigator.pushNamed(context, LoginScreen.routeName);
             },
             child: const Text(
-              "Belum punya akun ? Daftar Disini",
+              "Sudah punya akun ? Masuk Disini",
               style: TextStyle(decoration: TextDecoration.underline),
             ),
           )
@@ -121,6 +103,44 @@ class _SignFormState extends State<SignForm> {
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
+      ),
+    );
+  }
+
+  TextFormField buildUserNamaLengkapFormField() {
+    return TextFormField(
+      keyboardType: TextInputType.text,
+      controller: txtUserName,
+      onSaved: (newValue) => email = newValue,
+      style: mTitleStyle,
+      decoration: InputDecoration(
+        labelText: "Nama Lengkap",
+        hintText: "Masukan nama lengkap",
+        labelStyle: TextStyle(
+            color: focusNode.hasFocus ? mSubtitleColor : kPrimaryColor),
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
+      ),
+    );
+  }
+
+  TextFormField buildUserEmailLengkapFormField() {
+    return TextFormField(
+      keyboardType: TextInputType.text,
+      controller: txtUserName,
+      onSaved: (newValue) => email = newValue,
+      style: mTitleStyle,
+      decoration: InputDecoration(
+        labelText: "Email",
+        hintText: "Masukan email lengkap",
+        labelStyle: TextStyle(
+            color: focusNode.hasFocus ? mSubtitleColor : kPrimaryColor),
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
   }

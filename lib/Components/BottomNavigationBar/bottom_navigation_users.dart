@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logins_screen/utils/constants.dart';
 
 class BottomNavigationUsers extends StatefulWidget {
@@ -13,11 +12,6 @@ class BottomNavigationUsers extends StatefulWidget {
 }
 
 class _BottomNavigationUsers extends State<BottomNavigationUsers> {
-  // int _selectedIndex = 0;
-
-  // var bottomTextStyle =
-  // GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500);
-
   void _onItemTapped(int index) {
     setState(() {
       widget._currentIndex = index;
@@ -81,31 +75,6 @@ class _BottomNavigationUsers extends State<BottomNavigationUsers> {
         elevation: 0,
         showSelectedLabels: true,
       ),
-
-      // child: BottomNavigationBar(
-      //   type: BottomNavigationBarType.fixed,
-      //   backgroundColor: Colors.blueGrey,
-      //   currentIndex: widget._currentIndex,
-      //   onTap: _onItemTapped,
-      //   // ignore: prefer_const_literals_to_create_immutables
-      //   items: [
-      //     BottomNavigationBarItem(
-      //         icon: Icon(
-      //           Icons.home,
-      //         ),
-      //         label: "Features"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(
-      //           Icons.home,
-      //         ),
-      //         label: "Features"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.upload), label: "Post"),
-      //     // BottomNavigationBarItem(icon: Icon(Icons.layers), label: "Item"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.person), label: "Accounts"),
-      //   ],
-      // ),
     );
   }
 }

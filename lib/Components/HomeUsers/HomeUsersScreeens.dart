@@ -23,7 +23,7 @@ class _HomeUserComponent extends State<HomeUserComponent> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Container(
-      height: MediaQuery.of(context).size.height - 210,
+      height: MediaQuery.of(context).size.height - 100,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         dragStartBehavior: DragStartBehavior.down,
@@ -53,11 +53,11 @@ class _HomeUserComponent extends State<HomeUserComponent> {
               ),
             ),
             _productWidget(),
-            Container(
-              padding: EdgeInsets.only(left: 15, top: 15),
-              child: TitleText(text: "Terlaris", fontSize: 14),
-            ),
-            _productBestSellWidget()
+            // Container(
+            //   padding: EdgeInsets.only(left: 15, top: 15),
+            //   child: TitleText(text: "Terlaris", fontSize: 14),
+            // ),
+            // _productBestSellWidget()
             // _categoryWidget(),
             // _productWidget(),
           ],
@@ -195,15 +195,15 @@ class _HomeUserComponent extends State<HomeUserComponent> {
     return Container(
       // margin: EdgeInsets.symmetric(vertical: 10),
       width: fullWidth(context),
-      height: fullWidth(context) * .7,
+      height: fullWidth(context),
       child: GridView(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            childAspectRatio: 4 / 3,
-            mainAxisSpacing: 30,
-            crossAxisSpacing: 20),
-        padding: EdgeInsets.only(left: 20),
-        scrollDirection: Axis.horizontal,
+            crossAxisCount: 2,
+            childAspectRatio: 0.7,
+            crossAxisSpacing: 20
+        ),
+        padding: EdgeInsets.only(left: 20, right: 20),
+        scrollDirection: Axis.vertical,
         children: [
           _productCard("Ibanez RG", "assets/images/ibanez_product.jpg",
               "Ibanez", "Rp 10.000.000", true),
@@ -214,7 +214,7 @@ class _HomeUserComponent extends State<HomeUserComponent> {
               "Rp 25.000.000",
               false),
           _productCard("Ibanez AZS", "assets/images/ibanez_product03.png",
-              "Ibanez", "Rp 20.000.000", false)
+              "Ibanez", "Rp 20.000.000", false),
         ],
       ),
     );
@@ -234,7 +234,7 @@ class _HomeUserComponent extends State<HomeUserComponent> {
                   color: Color(0xfff8f8f8), blurRadius: 15, spreadRadius: 10),
             ],
           ),
-          margin: EdgeInsets.symmetric(vertical: 20),
+          margin: EdgeInsets.only(top: 20),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Stack(

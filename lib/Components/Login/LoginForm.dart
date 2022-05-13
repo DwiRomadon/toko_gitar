@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logins_screen/Screens/Login/LoginScreens.dart';
+import 'package:logins_screen/Screens/Features/HomeUsers.dart';
 
 import '../../Screens/Registrasi/RegistrasiScreens.dart';
 import '../../size_config.dart';
@@ -68,7 +68,7 @@ class _SignFormState extends State<SignForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-
+                Navigator.pushNamed(context, HomeUsers.routeName);
               }
             },
           ),

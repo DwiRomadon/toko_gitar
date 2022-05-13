@@ -48,3 +48,15 @@ AppBarTheme appBarTheme() {
     ),
   );
 }
+
+//add
+List<BoxShadow> shadow = <BoxShadow>[
+  BoxShadow(color: Color(0xfff8f8f8), blurRadius: 10, spreadRadius: 15),
+];
+double fullWidth(BuildContext context) {
+  return MediaQuery.of(context).size.width;
+}
+
+double fullHeight(BuildContext context) {
+  return MediaQuery.of(context).size.height;
+}

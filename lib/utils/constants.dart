@@ -26,6 +26,9 @@ const mBorderColor = Color(0xFFE8E8F3);
 const mFillColor = Color(0xFFFFFFFF);
 const mCardTitleColor = Color(0xFF2E4ECF);
 const mCardSubtitleColor = mTitleColor;
+const background = Color(0XFFFFFFFF);
+const iconColor = Color(0xffa8a09b);
+const Color lightGrey = Color(0xffE1E2E4);
 
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,

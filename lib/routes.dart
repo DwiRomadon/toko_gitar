@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:logins_screen/Screens/Features/HomeUsers.dart';
+import 'package:logins_screen/Screens/Features/USERS/HomeUsers.dart';
 import 'package:logins_screen/Screens/Login/LoginScreens.dart';
-import 'Screens/Features/DetailProduct/DetailScreens.dart';
+import 'Screens/Features/USERS/DetailProduct/DetailScreens.dart';
+import 'Screens/Features/USERS/Transaksi/DetailTransaksi.dart';
 import 'Screens/Registrasi/RegistrasiScreens.dart';
 
 
@@ -12,4 +13,5 @@ final Map<String, WidgetBuilder> routes = {
   //home users
   HomeUsers.routeName: (context) => HomeUsers(),
   DetailProductscreens.routeName: (context) => DetailProductscreens(),
+  DetailTransaksiPage.routeName: (context) => DetailTransaksiPage(),
 };

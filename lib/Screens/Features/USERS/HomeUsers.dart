@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logins_screen/Components/BottomNavigationBar/bottom_navigation_users.dart';
-import '../../../size_config.dart';
+import 'package:logins_screen/Screens/Features/USERS/Transaksi/Transaksi.dart';
+import '../../../../size_config.dart';
 import 'HomePage/HomeUsersPage.dart';
+import 'Keranjang/Keranjang.dart';
 
 class HomeUsers extends StatefulWidget {
   static String routeName = "/home_users";
@@ -20,10 +22,9 @@ class _HomeUsers extends State<HomeUsers> {
     if (index == 0) {
       return HomeUsersPage();
     } else if (index == 1) {
-      // return MenuPembelajaranSiswa();
+      return KerangjangPage();
     } else if (index == 2) {
-      // return JadwalPelajaranSiswa();
-      // return MenuKeuanganScreens();
+      return TransaksiPage();
     } else if (index == 3) {
       // return ProfileSiswaScreen();
     } else {}
@@ -32,6 +33,15 @@ class _HomeUsers extends State<HomeUsers> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        args = ModalRoute.of(context)?.settings.arguments;
+        if (args != null) {
+          // int to = args['to'];
+          _selectedIndex = args['index'];
+        }
+      });
+    });
     setState(() {
       _selectedIndex = 0;
     });

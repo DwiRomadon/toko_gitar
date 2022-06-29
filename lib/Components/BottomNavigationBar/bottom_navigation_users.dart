@@ -43,19 +43,19 @@ class _BottomNavigationUsers extends State<BottomNavigationUsers> {
             icon: widget._currentIndex == 0
                 ? Icon(Icons.home, color: kPrimaryColor)
                 : Icon(Icons.home),
-            label: "Features"
+            label: "Home"
           ),
           BottomNavigationBarItem(
             icon: widget._currentIndex == 1
-                ? Icon(Icons.shopping_cart, color: kPrimaryColor)
-                : Icon(Icons.shopping_cart),
-              label: "Cart"
+                ? Icon(Icons.add_shopping_cart_rounded, color: kPrimaryColor)
+                : Icon(Icons.add_shopping_cart_rounded),
+              label: "Keranjang"
           ),
           BottomNavigationBarItem(
             icon: widget._currentIndex == 2
-                ? Icon(Icons.star, color: kPrimaryColor)
-                : Icon(Icons.star),
-              label: "Favorite"
+                ? Icon(Icons.shopping_cart, color: kPrimaryColor)
+                : Icon(Icons.shopping_cart),
+              label: "Transaksi"
           ),
           BottomNavigationBarItem(
             icon: widget._currentIndex == 3

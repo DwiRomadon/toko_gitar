@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../size_config.dart';
 
@@ -238,6 +239,17 @@ class HexColor extends Color {
       hexColor = 'FF' + hexColor;
     }
     return int.parse(hexColor, radix: 16);
+  }
+}
+
+class CurrencyFormat {
+  static String convertToIdr(dynamic number, int decimalDigit) {
+    NumberFormat currencyFormatter = NumberFormat.currency(
+      locale: 'id',
+      symbol: 'Rp ',
+      decimalDigits: decimalDigit,
+    );
+    return currencyFormatter.format(number);
   }
 }
 

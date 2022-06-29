@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:logins_screen/Components/extentions.dart';
 
+import '../../API/RestApi.dart';
+import '../../Response/Keranjang.dart';
+import '../../Screens/Features/USERS/DetailProduct/DetailScreens.dart';
+import '../../main.dart';
 import '../../theme.dart';
 import '../../utils/constants.dart';
 import '../title_text.dart';
@@ -14,6 +20,8 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
     with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
+  var user = jsonDecode(dataUserLogin);
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +40,7 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
 
   @override
   Widget build(BuildContext context) {
+    print(DetailProductscreens.dataBarang);
     return Scaffold(
       floatingActionButton: _flotingButton(),
       body: SafeArea(
@@ -51,7 +60,9 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
                 children: <Widget>[
                   // _appBar(),
                   _productImage(),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   _categoryWidget(),
                 ],
               ),
@@ -76,7 +87,11 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          Image.asset('assets/images/ibanez_product.jpg')
+          Image.network(
+              "$baseUrl/gambar-barang/${DetailProductscreens.dataBarang['gambar']}",
+              height: 270,
+              width: 200,
+              fit: BoxFit.cover)
         ],
       ),
     );
@@ -103,7 +118,7 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
             borderRadius: BorderRadius.all(Radius.circular(13)),
             // color: Theme.of(context).backgroundColor,
           ),
-          child: Image.asset(image),
+          child: Image.network(image),
         ).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(13))),
       ),
     );
@@ -118,11 +133,11 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _thumbnail("assets/images/ibanez_product.jpg"),
-            _thumbnail("assets/images/ibanez_01.png"),
+            _thumbnail(
+                "$baseUrl/gambar-barang/${DetailProductscreens.dataBarang['gambar']}"),
           ]
-        // AppData.showThumbnailList.map((x) => _thumbnail(x)).toList()
-      ),
+          // AppData.showThumbnailList.map((x) => _thumbnail(x)).toList()
+          ),
     );
   }
 
@@ -164,7 +179,9 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      TitleText(text: "IBANEZ RG", fontSize: 25),
+                      TitleText(
+                          text: DetailProductscreens.dataBarang['namaBarang'],
+                          fontSize: 18),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
@@ -173,26 +190,15 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
                             children: <Widget>[
                               TitleText(
                                 text: "\Rp ",
-                                fontSize: 18,
+                                fontSize: 13,
                                 color: kColorRedSlow,
                               ),
                               TitleText(
-                                text: "10.000.000",
-                                fontSize: 25,
+                                text: CurrencyFormat.convertToIdr(
+                                    DetailProductscreens.dataBarang['harga'],
+                                    2),
+                                fontSize: 14,
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Icon(Icons.star,
-                                  color: kColorYellow, size: 17),
-                              Icon(Icons.star,
-                                  color: kColorYellow, size: 17),
-                              Icon(Icons.star,
-                                  color: kColorYellow, size: 17),
-                              Icon(Icons.star,
-                                  color: kColorYellow, size: 17),
-                              Icon(Icons.star_border, size: 17),
                             ],
                           ),
                         ],
@@ -200,7 +206,6 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
                     ],
                   ),
                 ),
-
                 _description(),
               ],
             ),
@@ -219,17 +224,90 @@ class _ProductDetailComponent extends State<ProductDetailComponent>
           fontSize: 14,
         ),
         SizedBox(height: 20),
-        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+        Text(DetailProductscreens.dataBarang['kategoriBarang']['keterangan']),
       ],
     );
   }
 
   FloatingActionButton _flotingButton() {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        showDataAlert();
+      },
       backgroundColor: kPrimaryColor,
       child: Icon(Icons.shopping_basket,
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor),
     );
+  }
+
+  showDataAlert() {
+    TextEditingController jmlBeliController = new TextEditingController();
+    var subTotal = "0";
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(
+                  20.0,
+                ),
+              ),
+            ),
+            contentPadding: EdgeInsets.only(
+              top: 10.0,
+            ),
+            title: Text(
+              "Masukan Jumlah Beli",
+              style: TextStyle(fontSize: 24.0),
+            ),
+            content: Container(
+              height: 200,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: jmlBeliController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Masukan Jumlah Beli Disini',
+                            labelText: 'Jumlah Beli'),
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 60,
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Navigator.of(context).pop();
+                          var data = {
+                            'idUser': user['_id'],
+                            'idBarang': DetailProductscreens.dataBarang['_id'],
+                            'jumlahBeli' : jmlBeliController.text
+                          };
+                          KeranjangResponse.inputKeranjangResponse(data, context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: kPrimaryColor,
+                          // fixedSize: Size(250, 50),
+                        ),
+                        child: Text(
+                          "Submit",
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }

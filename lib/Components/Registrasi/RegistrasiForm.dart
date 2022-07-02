@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logins_screen/Screens/Login/LoginScreens.dart';
 import 'package:logins_screen/Screens/Registrasi/RegistrasiScreens.dart';
 
+import '../../Response/UsersResponse.dart';
 import '../../size_config.dart';
 import '../../utils/constants.dart';
 import '../custom_surfix_icon.dart';
@@ -26,8 +27,11 @@ class _RegisterForm extends State<RegisterForm> {
     super.initState();
   }
 
-  TextEditingController txtUserName = TextEditingController(),
-      txtPassword = TextEditingController();
+  TextEditingController
+      txtUserName = TextEditingController(),
+      txtPassword = TextEditingController(),
+      txtNmLengkap = TextEditingController(),
+      txtEmail = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +54,13 @@ class _RegisterForm extends State<RegisterForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-
+                LoginResponse.registerResponse({
+                  "userName": txtUserName.text,
+                  "password": txtPassword.text,
+                  "namaLengkap": txtNmLengkap.text,
+                  "email": txtEmail.text,
+                  "role" : "user"
+                }, context);
               }
             },
           ),
@@ -110,7 +120,7 @@ class _RegisterForm extends State<RegisterForm> {
   TextFormField buildUserNamaLengkapFormField() {
     return TextFormField(
       keyboardType: TextInputType.text,
-      controller: txtUserName,
+      controller: txtNmLengkap,
       onSaved: (newValue) => email = newValue,
       style: mTitleStyle,
       decoration: InputDecoration(
@@ -129,7 +139,7 @@ class _RegisterForm extends State<RegisterForm> {
   TextFormField buildUserEmailLengkapFormField() {
     return TextFormField(
       keyboardType: TextInputType.text,
-      controller: txtUserName,
+      controller: txtEmail,
       onSaved: (newValue) => email = newValue,
       style: mTitleStyle,
       decoration: InputDecoration(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logins_screen/Screens/Features/USERS/HomeUsers.dart';
 
-import '../../Response/LoginResponse.dart';
+import '../../Response/UsersResponse.dart';
 import '../../Screens/Registrasi/RegistrasiScreens.dart';
 import '../../size_config.dart';
 import '../../utils/constants.dart';

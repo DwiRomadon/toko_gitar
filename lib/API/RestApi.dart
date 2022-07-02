@@ -1,7 +1,8 @@
-String baseUrl = 'http://192.168.18.53:8080';
+String baseUrl = 'http://192.168.8.105:8080';
 
 //users
 String signIn = "$baseUrl/users/login";
+String signUp = "$baseUrl/users/registrasi";
 
 //barang
 String dataBarangRes = "$baseUrl/barang/get-barang";

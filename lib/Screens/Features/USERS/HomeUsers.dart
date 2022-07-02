@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:logins_screen/Components/BottomNavigationBar/bottom_navigation_users.dart';
 import 'package:logins_screen/Screens/Features/USERS/Transaksi/Transaksi.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../size_config.dart';
+import '../../../main.dart';
 import 'HomePage/HomeUsersPage.dart';
 import 'Keranjang/Keranjang.dart';
+import 'Profile/ProfilePage.dart';
 
 class HomeUsers extends StatefulWidget {
   static String routeName = "/home_users";
@@ -18,7 +21,17 @@ class _HomeUsers extends State<HomeUsers> {
   var lastIndex;
   var args;
 
+  _getDataUsers() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    dataUserLogin = sharedPreferences.getString("dataUser");
+  }
+
   getCurrentPage(int index) {
+    if (index == null || index == "null") {
+      index = 0;
+      _selectedIndex = 0;
+      return HomeUsersPage();
+    }
     if (index == 0) {
       return HomeUsersPage();
     } else if (index == 1) {
@@ -26,8 +39,12 @@ class _HomeUsers extends State<HomeUsers> {
     } else if (index == 2) {
       return TransaksiPage();
     } else if (index == 3) {
-      // return ProfileSiswaScreen();
-    } else {}
+      return ProfilePage();
+    } else {
+      index = 0;
+      return HomeUsersPage();
+    }
+
   }
 
   @override
@@ -39,10 +56,13 @@ class _HomeUsers extends State<HomeUsers> {
         if (args != null) {
           // int to = args['to'];
           _selectedIndex = args['index'];
+        }else {
+          _selectedIndex = 0;
         }
       });
     });
     setState(() {
+      this._getDataUsers();
       _selectedIndex = 0;
     });
   }

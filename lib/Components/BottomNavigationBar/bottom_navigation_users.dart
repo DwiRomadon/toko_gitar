@@ -21,6 +21,7 @@ class _BottomNavigationUsers extends State<BottomNavigationUsers> {
 
   @override
   Widget build(BuildContext context) {
+    // print(widget._currentIndex);
     return Container(
       height: 85,
       decoration: BoxDecoration(
@@ -65,7 +66,7 @@ class _BottomNavigationUsers extends State<BottomNavigationUsers> {
           ),
         ],
         currentIndex: widget._currentIndex,
-        selectedItemColor: kPrimaryColor,
+        selectedItemColor: mBlueColor,
         unselectedItemColor: mSubtitleColor,
         onTap: _onItemTapped,
         backgroundColor: Colors.transparent,
